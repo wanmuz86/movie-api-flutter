@@ -32,12 +32,33 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Detail"),),
+      appBar: AppBar(title: Text("Detail"), backgroundColor: Colors.red,),
       body: _movie == null ? Center(child: CircularProgressIndicator(),) :
-      Column(
-        children: [
-          Text(_movie!.title), /// I AM USING FORCE UNWRAP ! BECAUSE I AM SURE IS NOT NULL
-        ],
+      SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(_movie!.title, style: TextStyle(fontSize: 32, color: Colors.red,),textAlign: TextAlign.center,), /// I AM USING FORCE UNWRAP ! BECAUSE I AM SURE IS NOT NULL
+              SizedBox(height: 8,),
+              Image.network(_movie!.poster),
+              SizedBox(height: 8,),
+              Text(_movie!.actors),
+              SizedBox(height: 8,),
+              Text(_movie!.runtime),
+              SizedBox(height: 8,),
+              Text(_movie!.year),
+              SizedBox(height: 8,),
+              Text(_movie!.plot, textAlign: TextAlign.center,),
+              SizedBox(height: 8,),
+              Text(_movie!.rated),
+              SizedBox(height: 8,),
+              Text(_movie!.type),
+        
+        
+            ],
+          ),
+        ),
       ),
     );
   }

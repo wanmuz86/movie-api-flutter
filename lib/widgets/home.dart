@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Movie app"),),
+        appBar: AppBar(title: Text("Movie app"), backgroundColor: Colors.red,),
 
       // In Flutter plural and singular can indicate what is expected as component
         // child (singular) -> one component expected (Container, SingleChildScrollView, Padding...)
