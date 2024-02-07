@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:movie_app/models/movie_search.dart';
+import 'package:http/http.dart' as http; // a function in http file
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -73,5 +78,30 @@ class _HomePageState extends State<HomePage> {
         ],
       )
     );
+  }
+
+  /// The word Future - This method is a method that will be called Asynchronously
+  ///  When there is the word future, this method needs to be called using
+  ///   - async - await
+  ///   - then ..
+  ///   <G> => The return type of the function
+  ///   If you are working with {} , this will be your Class
+  ///   If you are working with [], this will be List<Class>
+  Future<List<MovieSearch>> fetchMovies() async {
+    // import http
+    final response = await http
+        .get(Uri.parse('https://www.omdbapi.com/?s=Harry&apikey=87d10179'));
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+
+      // If you are working with {}. this method will be your forth method
+      // If you are working with [], this method will be your fifth method
+      return MovieSearch.moviesFromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
   }
 }
