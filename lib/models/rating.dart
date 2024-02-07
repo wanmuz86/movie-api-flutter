@@ -17,5 +17,5 @@ class Rating {
     }
     return results;
   }
-  
+
 }

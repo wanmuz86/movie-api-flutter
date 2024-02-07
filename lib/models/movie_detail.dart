@@ -1,4 +1,6 @@
 // 1) Create the class
+import 'package:movie_app/models/rating.dart';
+
 class MovieDetail {
   // 2 ) Define the properties
   final String imdbId;
@@ -12,12 +14,13 @@ class MovieDetail {
   final String actors;
   final String director;
   final String plot;
+  final List<Rating> ratings;
 
   // 3) Create the constructor
 
 MovieDetail({required this.imdbId, required this.title, required this.poster,
 required this.type, required this.rated,  this.released, required this.runtime, required this.year,
-required this.actors, required this.director, required this.plot});
+required this.actors, required this.director, required this.plot, required this.ratings});
 
 // 4) Json to object method
 
@@ -27,6 +30,7 @@ factory MovieDetail.fromJson(dynamic json){
       poster: json["Poster"],
       type: json["Type"], rated: json["Rated"], runtime: json["Runtime"],
       year: json["Year"], actors: json["Actors"], director: json["Director"],
-      plot: json["Plot"], released: json["Released"] ?? "");
+      plot: json["Plot"], released: json["Released"] ?? "",
+      ratings: Rating.ratingsFromJson(json["Ratings"]));
 }
 }
