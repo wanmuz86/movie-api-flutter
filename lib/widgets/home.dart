@@ -48,22 +48,28 @@ class _HomePageState extends State<HomePage> {
         children: [
           Row(
             children: [
-              TextField(decoration: InputDecoration(hintText: "Enter movie to search"),),
-              TextButton(onPressed: (){}, child: Text("Search"))
+              Expanded(
+                  flex: 2,
+                  child: TextField(decoration: InputDecoration(hintText: "Enter movie to search"),)),
+              Expanded(
+                flex:1,
+                  child: TextButton(onPressed: (){}, child: Text("Search")))
             ],
           ),
-          ListView.builder(
-            // How many rows are there => Always the length of your list/array
-              itemCount: _movies.length,
-              // What to show for each row
-              itemBuilder: (context,index){
-                return ListTile(
-                title: Text(_movies[index]["Title"]!),
-                  subtitle: Text(_movies[index]["Year"]!),
-                  leading: Image.network(_movies[index]["Poster"]!),
-                  trailing: Icon(Icons.chevron_right),
-                );
-              })
+          Expanded(
+            child: ListView.builder(
+              // How many rows are there => Always the length of your list/array
+                itemCount: _movies.length,
+                // What to show for each row
+                itemBuilder: (context,index){
+                  return ListTile(
+                  title: Text(_movies[index]["Title"]!),
+                    subtitle: Text(_movies[index]["Year"]!),
+                    leading: Image.network(_movies[index]["Poster"]!),
+                    trailing: Icon(Icons.chevron_right),
+                  );
+                }),
+          )
         ],
       )
     );
