@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var searchEditingController = TextEditingController();
   var _movies = [
 
   ];
@@ -29,14 +30,16 @@ class _HomePageState extends State<HomePage> {
             children: [
               Expanded(
                   flex: 2,
-                  child: TextField(decoration: InputDecoration(hintText: "Enter movie to search"),)),
+                  child: TextField(
+                    controller: searchEditingController,
+                    decoration: InputDecoration(hintText: "Enter movie to search"),)),
               Expanded(
                 flex:1,
                   child: TextButton(onPressed: (){
                     // var movies = fetchMovies(); -> Function without Future
                     // var movies = await fetchMovies() => Another way to call but rememvber to add async
                     // Call the method asynchrounously, the movies returned from API will be under value
-                    fetchMovies().then((value) =>
+                    fetchMovies(searchEditingController.text).then((value) =>
                     setState((){
                       _movies = value;
                     })
@@ -54,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                   return ListTile(
                   title: Text(_movies[index].title),
                     subtitle: Text(_movies[index].year),
-                    leading: Image.network(_movies[index].poster),
+                    leading: _movies[index].poster != "N/A" ?Image.network(_movies[index].poster):SizedBox(),
                     trailing: Icon(Icons.chevron_right),
                   );
                 }),
@@ -71,10 +74,10 @@ class _HomePageState extends State<HomePage> {
   ///   <G> => The return type of the function
   ///   If you are working with {} , this will be your Class
   ///   If you are working with [], this will be List<Class>
-  Future<List<MovieSearch>> fetchMovies() async {
+  Future<List<MovieSearch>> fetchMovies(String searchText) async {
     // import http
     final response = await http
-        .get(Uri.parse('https://www.omdbapi.com/?s=Harry&apikey=87d10179'));
+        .get(Uri.parse('https://www.omdbapi.com/?s=$searchText&apikey=87d10179'));
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
