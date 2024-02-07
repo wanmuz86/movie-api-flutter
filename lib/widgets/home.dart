@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/movie_search.dart';
-import 'package:http/http.dart' as http; // a function in http file
+import 'package:http/http.dart' as http;
+import 'package:movie_app/widgets/detail.dart'; // a function in http file
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -59,6 +60,9 @@ class _HomePageState extends State<HomePage> {
                     subtitle: Text(_movies[index].year),
                     leading: _movies[index].poster != "N/A" ?Image.network(_movies[index].poster):SizedBox(),
                     trailing: Icon(Icons.chevron_right),
+                    onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage(imdbId: _movies[index].imdbId,)));
+                    },
                   );
                 }),
           )

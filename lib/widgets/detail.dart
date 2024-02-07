@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  final String imdbId;
+  const DetailPage({super.key, required this.imdbId});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -12,7 +13,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Detail"),),
-      body: Text("Detail page"),
+      body: Text("Detail page for ${widget.imdbId}"),
     );
   }
 }
