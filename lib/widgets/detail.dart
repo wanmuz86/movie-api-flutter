@@ -54,8 +54,20 @@ class _DetailPageState extends State<DetailPage> {
               Text(_movie!.rated),
               SizedBox(height: 8,),
               Text(_movie!.type),
-        
-        
+              SizedBox(height: 8,),
+              Text("Rating", style: TextStyle(fontSize: 20),),
+              ListView.builder(
+                  shrinkWrap: true, // to stop the scroll behaviour and shrink it to the content
+                  itemCount: _movie!.ratings.length,
+                  itemBuilder: (context, index){
+                    var rating = _movie!.ratings[index];
+                    return Card(
+                      child: ListTile(
+                        title: Text(rating.source),
+                        subtitle: Text(rating.value),
+                      ),
+                    );
+                  })
             ],
           ),
         ),
